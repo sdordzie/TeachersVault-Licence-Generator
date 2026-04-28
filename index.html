@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Teacher FileVault Enterprise License Console</title>
+<style>
+:root{
+  --bg:#07111f;--card:rgba(255,255,255,.075);--card2:rgba(255,255,255,.11);--txt:#eef6ff;--mut:#9db0c8;
+  --line:rgba(255,255,255,.13);--pri:#2563eb;--pri2:#06b6d4;--ok:#22c55e;--warn:#f59e0b;--bad:#ef4444;
+  --shadow:0 24px 70px rgba(0,0,0,.45);--r:24px
+}
+*{box-sizing:border-box} body{
+  margin:0;font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Arial,sans-serif;color:var(--txt);
+  background:
+    radial-gradient(circle at 12% 0%,rgba(37,99,235,.45),transparent 30%),
+    radial-gradient(circle at 85% 12%,rgba(6,182,212,.32),transparent 30%),
+    radial-gradient(circle at 50% 100%,rgba(34,197,94,.18),transparent 26%),
+    var(--bg);
+  min-height:100vh;padding:22px
+}
+.shell{width:min(1180px,100%);margin:0 auto;display:grid;grid-template-columns:360px 1fr;gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);backdrop-filter:blur(18px)}
+.side{padding:20px;position:sticky;top:18px;height:max-content}.main{padding:20px}
+.brand{display:flex;gap:12px;align-items:center}.logo{width:54px;height:54px;border-radius:18px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--pri),var(--pri2));font-size:25px;box-shadow:0 14px 34px rgba(37,99,235,.35)}
+h1,h2,h3{margin:.2rem 0}.mut{color:var(--mut);line-height:1.5}.small{font-size:.86rem}.pill{display:inline-flex;gap:6px;align-items:center;padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.06);font-weight:800;font-size:.78rem}
+.grid{display:grid;gap:14px}.cols{grid-template-columns:repeat(2,minmax(0,1fr))}.cols3{grid-template-columns:repeat(3,minmax(0,1fr))}
+label{font-weight:850;font-size:.88rem}.help{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.12);margin-left:5px;font-size:.72rem;cursor:help}
+input,select,textarea{width:100%;padding:13px 14px;border-radius:16px;border:1px solid var(--line);background:rgba(4,10,21,.62);color:var(--txt);outline:none;font:inherit;margin-top:7px}
+textarea{min-height:100px;resize:vertical} input:focus,select:focus,textarea:focus{border-color:rgba(6,182,212,.85);box-shadow:0 0 0 4px rgba(6,182,212,.12)}
+button{border:0;border-radius:16px;padding:13px 16px;font-weight:900;color:white;background:linear-gradient(135deg,var(--pri),#1d4ed8);cursor:pointer;box-shadow:0 14px 30px rgba(37,99,235,.25)}
+button:hover{transform:translateY(-1px)}button.secondary{background:rgba(255,255,255,.12);box-shadow:none}button.good{background:linear-gradient(135deg,#16a34a,#22c55e)}button.warn{background:linear-gradient(135deg,#d97706,#f59e0b)}button.danger{background:linear-gradient(135deg,#dc2626,#ef4444)}
+.actions{display:flex;gap:10px;flex-wrap:wrap}.actions button{flex:1 1 150px}.output{background:#020817;border:1px solid var(--line);border-radius:20px;padding:15px;word-break:break-all}
+.key{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#86efac;font-size:.9rem}.code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;overflow:auto;background:#020817;border:1px solid var(--line);border-radius:18px;padding:14px;color:#dbeafe;max-height:320px}
+.step{display:flex;gap:10px;padding:12px;border:1px solid var(--line);background:rgba(255,255,255,.05);border-radius:18px}.step b{display:grid;place-items:center;min-width:30px;height:30px;border-radius:11px;background:rgba(37,99,235,.35)}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#020817;border:1px solid var(--line);padding:13px 17px;border-radius:16px;box-shadow:var(--shadow);display:none;z-index:5}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.tabs button{box-shadow:none;background:rgba(255,255,255,.09);padding:10px 12px}.tabs button.active{background:linear-gradient(135deg,var(--pri),var(--pri2))}
+.hide{display:none}
+@media(max-width:900px){body{padding:12px}.shell{grid-template-columns:1fr}.side{position:relative;top:auto}.cols,.cols3{grid-template-columns:1fr}.main,.side{padding:16px}.actions{position:sticky;bottom:8px;background:rgba(7,17,31,.78);backdrop-filter:blur(16px);padding:8px;border:1px solid var(--line);border-radius:20px;z-index:2}.actions button{min-height:46px}.brand h1{font-size:1.25rem}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="card side">
+    <div class="brand">
+      <div class="logo">🔐</div><div><h1>License Console</h1><div class="mut small">Teacher FileVault Enterprise Secure</div></div>
+    </div>
+    <p class="mut">Uses <b>ECDSA P‑256 digital signatures</b>. Keep the private key inside this generator only. Put only the public key inside the Teacher FileVault app.</p>
+    <div class="grid">
+      <div class="step"><b>1</b><div><b>Create/Import keypair</b><div class="mut small">The private key signs licenses. Never paste it into the public app.</div></div></div>
+      <div class="step"><b>2</b><div><b>Generate license</b><div class="mut small">Expiry, school, seats, storage, level and features are included.</div></div></div>
+      <div class="step"><b>3</b><div><b>Install public key</b><div class="mut small">Copy public key + validator into the app.</div></div></div>
+    </div>
+  </aside>
+
+  <main class="card main">
+    <div class="tabs">
+      <button class="active" onclick="tab('generate',this)">Generate</button>
+      <button onclick="tab('keys',this)">Keys</button>
+      <button onclick="tab('validate',this)">Validate</button>
+      <button onclick="tab('sql',this)">Supabase SQL</button>
+      <button onclick="tab('guide',this)">Guide</button>
+    </div>
+
+    <section id="generate" class="panel">
+      <h2>Generate Enterprise License</h2>
+      <p class="mut">Fill the form and generate a signed, tamper-resistant license key.</p>
+      <div class="grid cols">
+        <label>School Name <span class="help" title="The official school name that owns this license.">?</span><input id="school" placeholder="e.g. T.I AMASS Girls SHS"></label>
+        <label>School ID / Code <span class="help" title="Short unique school code. Use letters/numbers only.">?</span><input id="schoolId" placeholder="e.g. TIAMASS-ASOKORE"></label>
+        <label>School Level<select id="level"><option value="BASIC">Basic School - Term</option><option value="SHS">Senior High School - Semester</option><option value="BOTH">Basic + SHS</option></select></label>
+        <label>Plan<select id="plan"><option value="ENTERPRISE">Enterprise</option><option value="PRO">Professional</option><option value="TRIAL">Trial</option></select></label>
+        <label>Expiry Date<input id="expires" type="date"></label>
+        <label>Max Devices<input id="devices" type="number" min="1" value="5"></label>
+        <label>Max Users<input id="users" type="number" min="1" value="50"></label>
+        <label>Max Storage GB<input id="storage" type="number" min="1" value="10"></label>
+      </div>
+      <div class="grid cols3" style="margin-top:14px">
+        <label><input type="checkbox" class="feat" value="cloud_sync" checked> Cloud Sync</label>
+        <label><input type="checkbox" class="feat" value="supabase_storage" checked> Supabase Storage</label>
+        <label><input type="checkbox" class="feat" value="reports" checked> Reports</label>
+        <label><input type="checkbox" class="feat" value="multi_user" checked> Multi User</label>
+        <label><input type="checkbox" class="feat" value="analytics" checked> Analytics</label>
+        <label><input type="checkbox" class="feat" value="license_dashboard" checked> License Dashboard</label>
+      </div>
+      <div class="actions" style="margin-top:16px">
+        <button onclick="generateLicense()">Generate Signed License</button>
+        <button class="secondary" onclick="copy('licenseOut')">Copy License</button>
+        <button class="good" onclick="downloadLicense()">Download .license</button>
+      </div>
+      <h3>Generated License</h3>
+      <div class="output"><div id="licenseOut" class="key">No license generated yet.</div></div>
+      <h3>Decoded Payload</h3>
+      <div id="payloadOut" class="code">No payload yet.</div>
+    </section>
+
+    <section id="keys" class="panel hide">
+      <h2>Secure Key Management</h2>
+      <p class="mut">Generate once. Store private key safely. The public key can be embedded in the app for license verification.</p>
+      <div class="actions">
+        <button onclick="makeKeys()">Generate New Keypair</button>
+        <button class="secondary" onclick="exportKeys()">Export Key Backup</button>
+        <button class="warn" onclick="document.getElementById('keyFile').click()">Import Key Backup</button>
+        <input id="keyFile" type="file" accept="application/json" hidden onchange="importKeys(event)">
+      </div>
+      <h3>Public Key JWK for App</h3>
+      <div id="publicKeyOut" class="code"></div>
+      <div class="actions"><button class="secondary" onclick="copy('publicKeyOut')">Copy Public Key</button></div>
+      <h3>Private Key Status</h3>
+      <div id="privateStatus" class="output key">No private key loaded.</div>
+    </section>
+
+    <section id="validate" class="panel hide">
+      <h2>Validate a License</h2>
+      <textarea id="licToValidate" placeholder="Paste license here"></textarea>
+      <div class="actions"><button onclick="validateHere()">Validate</button></div>
+      <div id="validateOut" class="code">Waiting...</div>
+    </section>
+
+    <section id="sql" class="panel hide">
+      <h2>Supabase License Registry SQL</h2>
+      <p class="mut">Run this if you want online activation, revocation, device limit tracking and audit logs.</p>
+      <div id="sqlOut" class="code"></div>
+      <div class="actions"><button class="secondary" onclick="copy('sqlOut')">Copy SQL</button></div>
+    </section>
+
+    <section id="guide" class="panel hide">
+      <h2>Implementation Guide</h2>
+      <div class="grid">
+        <div class="step"><b>1</b><div><b>Use this console privately</b><div class="mut">Do not host the generator publicly because it contains your private key after import/generation.</div></div></div>
+        <div class="step"><b>2</b><div><b>Embed public key in FileVault</b><div class="mut">Open the generated public key and paste it into the app validator. Public key is safe to expose.</div></div></div>
+        <div class="step"><b>3</b><div><b>Use online registry for strict enterprise control</b><div class="mut">A license can be revoked, limited to devices, and audited using Supabase.</div></div></div>
+        <div class="step"><b>4</b><div><b>Never expose the private key</b><div class="mut">If exposed, generate a new keypair and update the public key in the app.</div></div></div>
+      </div>
+    </section>
+  </main>
+</div>
+<div id="toast" class="toast"></div>
+<script>
+const enc = new TextEncoder();
+const dec = new TextDecoder();
+let pubKey=null, privKey=null, lastLicense='';
+function show(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',2200)}
+function tab(id,btn){document.querySelectorAll('.panel').forEach(x=>x.classList.add('hide'));document.getElementById(id).classList.remove('hide');document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
+function b64u(buf){let bin='';new Uint8Array(buf).forEach(b=>bin+=String.fromCharCode(b));return btoa(bin).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
+function ub64(s){s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';let bin=atob(s);let a=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)a[i]=bin.charCodeAt(i);return a.buffer}
+function slug(s){return String(s||'').toUpperCase().replace(/[^A-Z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,42)}
+async function sha256(s){const h=await crypto.subtle.digest('SHA-256',enc.encode(s));return b64u(h).slice(0,28)}
+async function makeKeys(){
+  const kp=await crypto.subtle.generateKey({name:'ECDSA',namedCurve:'P-256'},true,['sign','verify']);
+  pubKey=kp.publicKey; privKey=kp.privateKey;
+  localStorage.tfvPub=JSON.stringify(await crypto.subtle.exportKey('jwk',pubKey));
+  localStorage.tfvPriv=JSON.stringify(await crypto.subtle.exportKey('jwk',privKey));
+  await refreshKeyUi(); show('New secure keypair generated');
+}
+async function loadKeys(){
+  if(localStorage.tfvPub){pubKey=await crypto.subtle.importKey('jwk',JSON.parse(localStorage.tfvPub),{name:'ECDSA',namedCurve:'P-256'},true,['verify'])}
+  if(localStorage.tfvPriv){privKey=await crypto.subtle.importKey('jwk',JSON.parse(localStorage.tfvPriv),{name:'ECDSA',namedCurve:'P-256'},true,['sign'])}
+  await refreshKeyUi()
+}
+async function refreshKeyUi(){
+  document.getElementById('publicKeyOut').textContent=localStorage.tfvPub||'No public key yet.';
+  document.getElementById('privateStatus').textContent=privKey?'Private key loaded in this browser. Keep this device/file safe.':'No private key loaded.';
+}
+async function exportKeys(){
+  if(!localStorage.tfvPriv)return show('Generate keys first');
+  const blob=new Blob([JSON.stringify({publicKey:JSON.parse(localStorage.tfvPub),privateKey:JSON.parse(localStorage.tfvPriv),createdAt:new Date().toISOString()},null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='tfv-enterprise-license-private-key-backup.json';a.click()
+}
+async function importKeys(e){
+  const file=e.target.files[0]; if(!file)return;
+  const data=JSON.parse(await file.text());
+  localStorage.tfvPub=JSON.stringify(data.publicKey||data.pub||data.public);
+  localStorage.tfvPriv=JSON.stringify(data.privateKey||data.priv||data.private);
+  await loadKeys(); show('Key backup imported')
+}
+async function generateLicense(){
+  if(!privKey){await makeKeys()}
+  const payload={
+    iss:'Teacher FileVault Enterprise',
+    aud:'TeacherFileVaultPro',
+    license_id:'TFV-'+Date.now().toString(36).toUpperCase()+'-'+Math.random().toString(36).slice(2,8).toUpperCase(),
+    school_name:document.getElementById('school').value.trim(),
+    school_id:slug(document.getElementById('schoolId').value || document.getElementById('school').value),
+    school_level:document.getElementById('level').value,
+    period_mode:document.getElementById('level').value==='SHS'?'semester':document.getElementById('level').value==='BASIC'?'term':'term_semester',
+    plan:document.getElementById('plan').value,
+    exp:document.getElementById('expires').value,
+    max_devices:Number(document.getElementById('devices').value||1),
+    max_users:Number(document.getElementById('users').value||1),
+    max_storage_gb:Number(document.getElementById('storage').value||1),
+    features:[...document.querySelectorAll('.feat:checked')].map(x=>x.value),
+    iat:new Date().toISOString()
+  };
+  if(!payload.school_name||!payload.exp)return show('Enter school name and expiry date');
+  const body=b64u(enc.encode(JSON.stringify(payload)));
+  const sig=await crypto.subtle.sign({name:'ECDSA',hash:'SHA-256'},privKey,enc.encode(body));
+  lastLicense='TFV2.'+body+'.'+b64u(sig);
+  document.getElementById('licenseOut').textContent=lastLicense;
+  document.getElementById('payloadOut').textContent=JSON.stringify(payload,null,2);
+  show('Signed enterprise license generated')
+}
+async function verifyLicense(lic){
+  if(!pubKey)throw new Error('No public key loaded');
+  const parts=String(lic).trim().split('.');
+  if(parts.length!==3||parts[0]!=='TFV2')throw new Error('Invalid license format');
+  const payload=JSON.parse(dec.decode(ub64(parts[1])));
+  const ok=await crypto.subtle.verify({name:'ECDSA',hash:'SHA-256'},pubKey,ub64(parts[2]),enc.encode(parts[1]));
+  if(!ok)throw new Error('Signature failed. License was changed or is fake.');
+  if(payload.exp && new Date(payload.exp+'T23:59:59') < new Date())throw new Error('License expired on '+payload.exp);
+  return payload
+}
+async function validateHere(){
+  try{const p=await verifyLicense(document.getElementById('licToValidate').value);document.getElementById('validateOut').textContent='VALID LICENSE\n\n'+JSON.stringify(p,null,2)}
+  catch(e){document.getElementById('validateOut').textContent='INVALID: '+e.message}
+}
+function copy(id){navigator.clipboard.writeText(document.getElementById(id).textContent);show('Copied')}
+function downloadLicense(){if(!lastLicense)return show('Generate license first');const blob=new Blob([lastLicense],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='teacher-filevault-enterprise.license';a.click()}
+document.getElementById('expires').value=(new Date(new Date().setFullYear(new Date().getFullYear()+1))).toISOString().slice(0,10);
+document.getElementById('sqlOut').textContent=`-- Teacher FileVault Enterprise License Registry
+create extension if not exists pgcrypto;
+
+create table if not exists public.tfv_licenses (
+  id uuid primary key default gen_random_uuid(),
+  license_id text unique not null,
+  license_hash text unique not null,
+  school_id text not null,
+  school_name text not null,
+  plan text not null default 'ENTERPRISE',
+  school_level text not null default 'BOTH',
+  period_mode text not null default 'term_semester',
+  status text not null default 'active',
+  expires_at date not null,
+  max_devices integer not null default 1,
+  max_users integer not null default 1,
+  max_storage_gb integer not null default 5,
+  features jsonb not null default '[]'::jsonb,
+  public_notes text,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  revoked_at timestamptz
+);
+
+create table if not exists public.tfv_license_activations (
+  id uuid primary key default gen_random_uuid(),
+  license_id text not null references public.tfv_licenses(license_id) on delete cascade,
+  device_id text not null,
+  device_name text,
+  school_id text,
+  app_version text,
+  last_seen_at timestamptz not null default now(),
+  activated_at timestamptz not null default now(),
+  unique(license_id, device_id)
+);
+
+create table if not exists public.tfv_license_audit (
+  id uuid primary key default gen_random_uuid(),
+  license_id text,
+  event_type text not null,
+  device_id text,
+  details jsonb default '{}'::jsonb,
+  created_at timestamptz not null default now()
+);
+
+alter table public.tfv_licenses enable row level security;
+alter table public.tfv_license_activations enable row level security;
+alter table public.tfv_license_audit enable row level security;
+
+drop policy if exists "License public lookup" on public.tfv_licenses;
+drop policy if exists "Activation public insert" on public.tfv_license_activations;
+drop policy if exists "Activation public update" on public.tfv_license_activations;
+drop policy if exists "Audit public insert" on public.tfv_license_audit;
+
+create policy "License public lookup"
+on public.tfv_licenses for select to anon
+using (status in ('active','trial','suspended','revoked'));
+
+create policy "Activation public insert"
+on public.tfv_license_activations for insert to anon
+with check (true);
+
+create policy "Activation public update"
+on public.tfv_license_activations for update to anon
+using (true) with check (true);
+
+create policy "Audit public insert"
+on public.tfv_license_audit for insert to anon
+with check (true);
+
+create or replace function public.set_tfv_updated_at()
+returns trigger as $$
+begin
+  new.updated_at=now();
+  return new;
+end;
+$$ language plpgsql;
+
+drop trigger if exists tfv_licenses_updated_at on public.tfv_licenses;
+create trigger tfv_licenses_updated_at
+before update on public.tfv_licenses
+for each row execute function public.set_tfv_updated_at();
+
+notify pgrst, 'reload schema';`;
+loadKeys();
+</script>
+</body>
+</html>
