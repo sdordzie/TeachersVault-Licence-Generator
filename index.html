@@ -38,6 +38,48 @@ button:hover{transform:translateY(-1px)}button.secondary{background:rgba(255,255
 .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.tabs button{box-shadow:none;background:rgba(255,255,255,.09);padding:10px 12px}.tabs button.active{background:linear-gradient(135deg,var(--pri),var(--pri2))}
 .hide{display:none}
 @media(max-width:900px){body{padding:12px}.shell{grid-template-columns:1fr}.side{position:relative;top:auto}.cols,.cols3{grid-template-columns:1fr}.main,.side{padding:16px}.actions{position:sticky;bottom:8px;background:rgba(7,17,31,.78);backdrop-filter:blur(16px);padding:8px;border:1px solid var(--line);border-radius:20px;z-index:2}.actions button{min-height:46px}.brand h1{font-size:1.25rem}}
+
+
+/* ==============================
+   PREMIUM MOBILE-FIRST UI UPGRADE
+   ============================== */
+html{scroll-behavior:smooth}
+body{padding:max(14px,env(safe-area-inset-top)) max(14px,env(safe-area-inset-right)) calc(18px + env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left));}
+button,input,select,textarea{-webkit-tap-highlight-color:transparent}
+input,select,textarea{font-size:16px;min-height:50px}
+select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--mut) 50%),linear-gradient(135deg,var(--mut) 50%,transparent 50%);background-position:calc(100% - 18px) 22px,calc(100% - 13px) 22px;background-size:5px 5px;background-repeat:no-repeat;padding-right:42px}
+.card{overflow:hidden}.main{min-width:0}.output,.code{overflow-wrap:anywhere;word-break:break-word}.key{line-height:1.55}
+.tabs{position:sticky;top:8px;z-index:10;padding:8px;border:1px solid var(--line);border-radius:22px;background:rgba(7,17,31,.72);backdrop-filter:blur(18px);box-shadow:0 18px 50px rgba(0,0,0,.22)}
+.tabs button{flex:1 1 auto;min-height:44px;white-space:nowrap}
+.panel{animation:panelIn .22s ease}@keyframes panelIn{from{opacity:.3;transform:translateY(8px)}to{opacity:1;transform:none}}
+input[type="checkbox"]{width:20px;height:20px;min-height:auto;margin:0 8px 0 0;vertical-align:middle;accent-color:var(--pri2)}
+label:has(input[type="checkbox"]){display:flex;align-items:center;gap:8px;padding:12px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.055)}
+.step{transition:.18s ease}.step:hover{transform:translateY(-1px);background:rgba(255,255,255,.075)}
+.help{position:relative}.help:after{content:attr(title);position:absolute;right:0;bottom:130%;width:230px;background:#020817;color:#e5eefc;padding:10px 12px;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transform:translateY(6px);transition:.15s;font-weight:600;line-height:1.35;z-index:30}.help:hover:after{opacity:1;transform:none}
+.toast{max-width:min(92vw,460px);text-align:center}
+
+@media(max-width:900px){
+  body{padding:10px 10px calc(12px + env(safe-area-inset-bottom));background-attachment:fixed}
+  .shell{gap:12px}
+  .side{padding:16px;border-radius:24px;position:relative}
+  .main{padding:14px;border-radius:24px}
+  .brand{align-items:flex-start}.logo{width:48px;height:48px;border-radius:16px;font-size:22px}.brand h1{font-size:1.18rem;line-height:1.15}.mut{font-size:.92rem}
+  .side>.mut{margin:.75rem 0}.side .grid{gap:8px}.step{padding:10px;border-radius:16px}.step b{min-width:28px;height:28px;border-radius:10px}
+  .tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;top:6px;margin:0 0 14px;border-radius:20px;padding:6px;overflow-x:auto;scroll-snap-type:x mandatory}.tabs button{font-size:.78rem;padding:9px 6px;border-radius:14px;scroll-snap-align:center;min-width:0}
+  h2{font-size:1.18rem}.panel>p.mut{font-size:.9rem;margin-top:4px}
+  .grid{gap:11px}.cols,.cols3{grid-template-columns:1fr!important}
+  label{font-size:.9rem} input,select,textarea{border-radius:15px;padding:13px 14px} textarea{min-height:92px}
+  .actions{display:grid;grid-template-columns:1fr;gap:8px;position:sticky;bottom:8px;margin-left:-6px;margin-right:-6px;background:rgba(7,17,31,.84);backdrop-filter:blur(18px);padding:8px;border-radius:22px;box-shadow:0 16px 45px rgba(0,0,0,.35)}
+  .actions button{width:100%;min-height:50px;font-size:.95rem;border-radius:16px;flex:auto}
+  .output,.code{border-radius:16px;padding:12px;font-size:.82rem;max-height:260px}.key{font-size:.78rem}
+  #generate .output{max-height:180px;overflow:auto}
+  .toast{bottom:calc(14px + env(safe-area-inset-bottom));font-size:.92rem}
+  .help:after{display:none}
+}
+@media(max-width:420px){
+  body{padding-left:8px;padding-right:8px}.main,.side{padding:12px;border-radius:20px}.tabs button{font-size:.7rem;padding:8px 3px}.logo{width:44px;height:44px}.brand h1{font-size:1.05rem}h2{font-size:1.08rem}.pill{font-size:.72rem}.step{font-size:.88rem}.step .small{font-size:.78rem}button{padding:12px}.code{font-size:.74rem}.key{font-size:.72rem}.output{padding:10px}
+}
+
 </style>
 </head>
 <body>
